@@ -8,7 +8,6 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import {ChevronDown} from 'lucide-react'
-import { Button } from './ui/button'
 const UserButton = () => {
     return (
         <div>
