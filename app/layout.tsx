@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Navbar } from "@/components/Navbar";
 
 
 
@@ -14,12 +16,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+
       <body
-        className="font-poppins container mx-auto m-4"
+        className="font-poppins container mx-auto"
       >
-        {children}
+        <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+        >
+            <Navbar />
+       <main className="m-4">
+       {children}
+       </main>
+
+        </ThemeProvider>
       </body>
+
     </html>
   );
 }
