@@ -1,12 +1,28 @@
-import React from 'react'
-import { Button } from './ui/button'
+"use client"
+import React, { useState } from 'react'
 import {SiTailwindcss, SiLaravel, SiShadcnui} from 'react-icons/si'
 import { RiNextjsLine } from "react-icons/ri";
-import { FaGithub } from "react-icons/fa";
 
-import Link from 'next/link';
+import { Check, Copy } from 'lucide-react';
 
-const SectionDetails = () => {
+interface CopyableCodeTabProps {
+    code: string;
+    language?: string;
+  }
+
+const SectionDetails = ( {code , language}: CopyableCodeTabProps) => {
+    const [isCopied, setIsCopied] = useState(false);
+
+    const copyToClipboard = async () => {
+        try {
+          await navigator.clipboard.writeText(code);
+          setIsCopied(true);
+          setTimeout(() => setIsCopied(false), 2000);
+        } catch (err) {
+          console.error('Failed to copy text: ', err);
+        }
+      };
+
   return (
 
 <section>
@@ -16,15 +32,38 @@ const SectionDetails = () => {
         <h2 className="text-3xl font-bold sm:text-4xl">Next.js + Laravel</h2>
 
         <p className="mt-4 text-gray-600">
-          A next.js boilerplace for your project if you use laravel as backend and next.js as frontend
+          A next.js boilerplate for your project if you use laravel as backend and next.js as frontend
         </p>
 
-        <Button  className='mt-6' asChild>
+        {/* <Button  className='mt-6' asChild>
             <Link href="https://github.com/kirubel12/laravel-nextjs-boilerplate">
             <FaGithub />
             Github Repo
             </Link>
-        </Button>
+        </Button> */}
+        <div className="bg-gray-900 rounded-lg overflow-hidden w-[580px] shadow-lg mt-4">
+      <div className="flex justify-between items-center px-4 py-2 bg-gray-800">
+        <span className="text-sm font-mono text-gray-400">Terminal</span>
+        <button
+          onClick={copyToClipboard}
+          className="text-gray-400 hover:text-white focus:outline-none transition-colors duration-200"
+          aria-label="Copy to clipboard"
+        >
+          {isCopied ? (
+            <Check className="w-5 h-5 text-green-500" />
+          ) : (
+            <Copy className="w-5 h-5" />
+          )}
+        </button>
+      </div>
+      <div className="p-4">
+        <pre className="flex">
+          <span className="text-green-500 mr-2">$</span>
+          <code className="text-sm font-mono text-gray-300">gh repo clone kirubel12/laravel-nextjs-boilerplate <span className='text-primary'>YOUR_FOLDER</span></code>
+        </pre>
+
+      </div>
+    </div>
       </div>
 
       <div className="grid grid-cols-1 gap-14 sm:grid-cols-2 ">
