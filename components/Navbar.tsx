@@ -60,7 +60,10 @@ export function Navbar() {
                             )}
 
                             {user && (
-                                <UserButton />
+                                <div>
+                                    <UserButton />
+                                </div>
+
                             )}
                         </div>
                     </div>

@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+"use client"
 import useSWR from 'swr'
 import axios from '@/lib/api'
-import { useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 interface User {
     email_verified_at: string | null
